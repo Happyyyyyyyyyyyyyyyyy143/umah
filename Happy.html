@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Torchik 👑</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#fff0f6,#ffd6e8,#ffcce0);
+  overflow:hidden;
+}
+
+/* pages */
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
+  text-align:center;
+  padding:20px;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.page.active{display:flex}
+
+/* buttons */
+button{
+  padding:15px 35px;
+  border:none;
+  border-radius:30px;
+  background:#ff69b4;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 0 20px pink;
+  margin:10px;
+}
+
+/* boxes */
+.box{
+  background:#ffd6e8;
+  padding:25px;
+  border-radius:20px;
+  max-width:800px;
+  box-shadow:0 0 25px rgba(255,105,180,0.5);
+}
+
+/* glow */
+.glow{animation:glow 2s infinite alternate}
+@keyframes glow{
+  from{text-shadow:0 0 10px pink}
+  to{text-shadow:0 0 30px hotpink}
+}
+
+/* name glow */
+.nameGlow{
+  font-size:42px;
+  font-weight:bold;
+  animation:nameGlow 2s infinite alternate;
+}
+@keyframes nameGlow{
+  from{text-shadow:0 0 10px pink}
+  to{text-shadow:0 0 35px hotpink}
+}
+
+/* balloons */
+.balloons span{
+  position:absolute;
+  bottom:-50px;
+  font-size:40px;
+  animation:float 8s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-120vh)}
+}
+
+/* hearts */
+.hearts span{
+  position:absolute;
+  bottom:-50px;
+  font-size:28px;
+  animation:hearts 6s linear infinite;
+}
+@keyframes hearts{
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* stars */
+.stars span{
+  position:absolute;
+  top:-10px;
+  font-size:14px;
+  animation:fall 6s linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh)}
+}
+
+/* kitty */
+.kitty{font-size:90px}
+
+/* typewriter */
+.type{
+  border-right:2px solid hotpink;
+  white-space:pre-wrap;
+  overflow:hidden;
+}
+
+/* heartbeat */
+.heartbeat{animation:beat 1.2s infinite}
+@keyframes beat{
+  50%{transform:scale(1.08)}
+}
+
+/* secret */
+.secret{display:none;color:#ff1493;margin-top:15px}
+
+/* fade end */
+.fadeEnd{opacity:0;animation:fadeIn 4s forwards}
+@keyframes fadeIn{to{opacity:1}}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <div class="stars"></div>
+  <h1 class="glow">🎉 HAPPY BIRTHDAY <span class="nameGlow">Torchik</span> 🎉</h1>
+  <p>You unlocked something magical ✨</p>
+
+  <button onclick="unlockSecret()">Click here Princess 👑</button>
+
+  <div id="secret" class="secret">
+    💌 You just unlocked something meant only for you, Torchik 💖<br><br>
+    <button onclick="nextPage(2)">Next ✨</button>
+  </div>
+
+  <div class="balloons"></div>
+  <div class="hearts"></div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="box">
+Today isn’t just another date on the calendar — it’s the day someone truly special came into this world 🌍💖<br><br>
+I hope you wake up smiling and end the day knowing how loved, valued, and appreciated you are 💫🌸<br><br>
+May this new year bring peace on heavy days and laughter on ordinary ones 🌈🌙<br><br>
+Happy Birthday once again 🎉💖
+  </div>
+  <br>
+  <button onclick="nextPage(3)">Click here Princess 👑</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="kitty glow">😿🐱</div>
+  <h2>Do you love me?</h2>
+
+  <button onclick="yesClick()">YES 💖</button>
+  <button id="noBtn" onmouseover="moveNo()">NO 😶</button>
+
+  <p id="noText" style="display:none;color:#ff1493;">
+    Plzzz click YES princess 🥺💗
+  </p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <div class="stars"></div>
+
+  <img src="cat.jpg" width="120">
+  <img src="download.jpg" width="120">
+
+  <div class="box">
+    <p id="finalText" class="type"></p>
+  </div>
+
+  <div class="fadeEnd">
+    🌸 Thank you for reading till the end, Princess 💖
+  </div>
+
+  <div style="margin-top:15px;color:#ff1493;cursor:pointer;text-decoration:underline"
+       onclick="lockedMsg()">
+    🔒 Tap here for something secret
+  </div>
+</div>
+
+<script>
+/* navigation */
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+/* secret unlock */
+let taps=0;
+function unlockSecret(){
+  taps++;
+  if(taps===3){
+    document.getElementById('secret').style.display='block';
+  }
+}
+
+/* no button prank */
+function moveNo(){
+  let b=document.getElementById('noBtn');
+  b.style.position='absolute';
+  b.style.left=Math.random()*80+'%';
+  b.style.top=Math.random()*80+'%';
+  document.getElementById('noText').style.display='block';
+}
+
+/* yes click */
+function yesClick(){
+  alert('💖 She said YES 💖\nSave this moment!');
+  nextPage(4);
+  typeText();
+}
+
+/* final typewriter */
+const text=`I don’t have big speeches or dramatic lines…
+
+I just know that when I think of smiles, comfort, and calm — your name shows up first 💫🤍
+
+I like the way you exist without trying,
+the way small things feel nicer when you’re around 🌷
+You don’t even realize it, but you’ve slowly become someone I genuinely care about 💖
+
+So this is me being honest, a little nervous, and very real 😅✨
+I don’t want perfection, promises, or pressure —
+I just want you, in the simplest way possible 🌸
+
+Would you like to start something soft, sweet, and real with me?
+<span class="heartbeat">Maybe as us? 🌙💞</span>`;
+
+let i=0;
+function typeText(){
+  if(i<text.length){
+    document.getElementById('finalText').innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeText,40);
+  }
+}
+
+/* locked message */
+function lockedMsg(){
+  const p=prompt("Enter the secret word 👀");
+  if(p && p.toLowerCase()==="princess"){
+    alert("💌 You are the secret. Always.");
+  }
+}
+
+/* balloons */
+document.querySelectorAll('.balloons').forEach(c=>{
+  for(let i=0;i<20;i++){
+    let s=document.createElement('span');
+    s.innerText='🎈';
+    s.style.left=Math.random()*100+'%';
+    s.style.animationDuration=5+Math.random()*5+'s';
+    c.appendChild(s);
+  }
+});
+
+/* hearts */
+document.querySelectorAll('.hearts').forEach(c=>{
+  for(let i=0;i<20;i++){
+    let s=document.createElement('span');
+    s.innerText='💖';
+    s.style.left=Math.random()*100+'%';
+    s.style.animationDuration=4+Math.random()*4+'s';
+    c.appendChild(s);
+  }
+});
+
+/* stars */
+document.querySelectorAll('.stars').forEach(c=>{
+  for(let i=0;i<25;i++){
+    let s=document.createElement('span');
+    s.innerText='✨';
+    s.style.left=Math.random()*100+'%';
+    s.style.animationDuration=4+Math.random()*5+'s';
+    c.appendChild(s);
+  }
+});
+</script>
+
+</body>
+</html>
